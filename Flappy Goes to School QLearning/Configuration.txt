@@ -1,0 +1,3 @@
+#zZAHID-DELL
+
+Game screen 385, 35, 585, 500
