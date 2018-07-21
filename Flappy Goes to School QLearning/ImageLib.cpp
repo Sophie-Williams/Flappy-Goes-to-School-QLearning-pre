@@ -12,7 +12,7 @@ ImageLib::~ImageLib()
 {
 }
 
-bool ImageLib::extractFeature(Mat image, int &flappyHeight)
+bool ImageLib::extractFeature(Mat image, int & distX, int & distY, int & scope, int &flappyHeight)
 {
 	Rect roiFlappy(0, 0, 50, 550);
 	Mat imageFlappy = image(roiFlappy);
@@ -25,11 +25,14 @@ bool ImageLib::extractFeature(Mat image, int &flappyHeight)
 	int x, y;
 	getPillarPos(image, x, y);
 
-	circle(image, Point(25, flappyHeight), 15, Scalar(0, 0, 255), 2, 8);
-	line(image, Point(x, y), Point(x + 130, y), Scalar(0, 255, 0), 2, 8);
-	line(image, Point(x, y - 180), Point(x + 130, y - 180), Scalar(0, 255, 0), 2, 8);
-	
-	FileIO::saveImage(image, imagePath, to_string(imageCounter++));
+	distX = max(0, x - 25);
+	distY = y - flappyHeight;
+	scope = image.rows - flappyHeight;
+
+	if (distX == 0)
+	{
+		scope = distY;
+	}
 
 	return true;
 }

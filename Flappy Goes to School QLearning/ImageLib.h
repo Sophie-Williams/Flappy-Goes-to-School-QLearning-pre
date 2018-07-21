@@ -12,12 +12,9 @@ public:
 	ImageLib();
 	~ImageLib();
 
-	bool extractFeature(Mat image, int &flappyHeight);
+	bool extractFeature(Mat image, int & distX, int & distY, int & scope, int &flappyHeight);
 
 private:
-	int imageCounter = 0;
-	string imagePath = "File\\Image Edit\\";
-
 	bool isAlive(Mat image, int &height);
 	void getPillarPos(Mat image, int &x, int &y);
 };
