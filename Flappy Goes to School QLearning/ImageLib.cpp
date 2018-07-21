@@ -37,7 +37,7 @@ bool ImageLib::extractFeature(Mat image, int &flappyHeight)
 bool ImageLib::isAlive(Mat image, int & height)
 {
 	Mat mask;
-	inRange(image, Scalar(0, 170, 200), Scalar(50, 185, 225), mask);
+	inRange(image, Scalar(0, 170, 200, 0), Scalar(50, 185, 225, 255), mask);
 
 	for (int i = 0; i < mask.rows; i++)
 	{
@@ -57,7 +57,7 @@ bool ImageLib::isAlive(Mat image, int & height)
 void ImageLib::getPillarPos(Mat image, int & x, int & y)
 {
 	Mat mask;
-	inRange(image, Scalar(20, 105, 65), Scalar(80, 220, 160), mask);
+	inRange(image, Scalar(20, 105, 65, 0), Scalar(80, 220, 160, 255), mask);
 
 	int kernel;
 	Mat element;
@@ -90,7 +90,7 @@ void ImageLib::getPillarPos(Mat image, int & x, int & y)
 			highX = max(highX, contours[i][j].x);
 		}
 
-		if (lowY == 0 || highX <= 5)
+		if (lowY == 0 || highX <= 50)
 		{
 			continue;
 		}

@@ -4,8 +4,10 @@ game screen       385, 35, 585, 500
 
 flappy row        550
 flappy col        50
-flappy BGR low    0, 170, 200
-flappy BGR high   50, 185, 225
+flappy BGR low    0, 170, 200, 0
+flappy BGR high   50, 185, 225, 255
 
-pillar BGR low    20, 105, 65
-pillar BGR high   80, 220, 160
+pillar BGR low    20, 105, 65, 0
+pillar BGR high   80, 220, 160, 255
+
+Mouse (480, 560) (680, 440)

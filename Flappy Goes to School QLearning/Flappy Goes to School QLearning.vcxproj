@@ -131,12 +131,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DesktopIO.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="ImageLib.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Screen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DesktopIO.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="ImageLib.h" />
     <ClInclude Include="Screen.h" />
