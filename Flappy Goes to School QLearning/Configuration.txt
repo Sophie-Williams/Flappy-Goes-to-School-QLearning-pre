@@ -1,3 +1,11 @@
-#zZAHID-DELL
+#ZAHID-DELL
 
-Game screen 385, 35, 585, 500
+game screen       385, 35, 585, 500
+
+flappy row        550
+flappy col        50
+flappy BGR low    0, 170, 200
+flappy BGR high   50, 185, 225
+
+pillar BGR low    20, 105, 65
+pillar BGR high   80, 220, 160
