@@ -14,7 +14,7 @@ ImageLib::~ImageLib()
 
 bool ImageLib::extractFeature(Mat image, int & distX, int & distY, int & scope, int &flappyHeight)
 {
-	Rect roiFlappy(0, 0, 50, 550);
+	Rect roiFlappy(0, 0, 10, 110);
 	Mat imageFlappy = image(roiFlappy);
 
 	if (!isAlive(imageFlappy, flappyHeight))
@@ -25,7 +25,7 @@ bool ImageLib::extractFeature(Mat image, int & distX, int & distY, int & scope, 
 	int x, y;
 	getPillarPos(image, x, y);
 
-	distX = max(0, x - 25);
+	distX = max(0, x - 5);
 	distY = y - flappyHeight;
 	scope = image.rows - flappyHeight;
 
@@ -65,11 +65,11 @@ void ImageLib::getPillarPos(Mat image, int & x, int & y)
 	int kernel;
 	Mat element;
 
-	kernel = 5;
+	kernel = 1;
 	element = getStructuringElement(MORPH_RECT, Size(2 * kernel + 1, 2 * kernel + 1), Point(kernel, kernel));
 	morphologyEx(mask, mask, MORPH_CLOSE, element);
 
-	kernel = 10;
+	kernel = 2;
 	element = getStructuringElement(MORPH_RECT, Size(2 * kernel + 1, 2 * kernel + 1), Point(kernel, kernel));
 	morphologyEx(mask, mask, MORPH_OPEN, element);
 
@@ -93,7 +93,7 @@ void ImageLib::getPillarPos(Mat image, int & x, int & y)
 			highX = max(highX, contours[i][j].x);
 		}
 
-		if (lowY == 0 || highX <= 50)
+		if (lowY == 0 || highX <= 10)
 		{
 			continue;
 		}

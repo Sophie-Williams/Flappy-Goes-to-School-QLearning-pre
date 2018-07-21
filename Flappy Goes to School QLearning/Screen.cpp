@@ -38,8 +38,8 @@ Mat Screen::hwnd2mat(HWND hwnd, int x, int y, int h, int w)
 
 	srcheight = h;
 	srcwidth = w;
-	height = srcheight / 1;  //change this to whatever size you want to resize to
-	width = srcwidth / 1;
+	height = srcheight / 5;  //change this to whatever size you want to resize to
+	width = srcwidth / 5;
 
 	src.create(height, width, CV_8UC4);
 
