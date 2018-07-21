@@ -15,12 +15,13 @@ ImageLib imageLib;
 DesktopIO desktopIO;
 
 string imagePath = "File\\Image\\";
+string filePath = "File\\Text\\";
 
 int imageCounter;
 
 StaticBot bot;
 
-vector<int> processTime;
+vector<int> processTime, scores;
 
 int main()
 {
@@ -35,7 +36,7 @@ int main()
 		bool alive = true;
 		int distX, distY, scope, flappyHeight, preFlappyHeight=300;
 
-		clock_t processStartTime;
+		clock_t processStartTime, gameStartTime;
 
 		Sleep(2000);
 
@@ -45,21 +46,18 @@ int main()
 		}
 
 		desktopIO.mouseClick(680, 440, 30);
-		//Sleep(500);
+		gameStartTime = clock();
 
-		for (int i = 0; i < 20; i++)
-		{
-			image = screen.getScreen(385, 35, 585, 500);
-		}
+		Sleep(500);
 
 		while (1)
 		{
-			processStartTime = clock();
+			//processStartTime = clock();
 
 			image = screen.getScreen(385, 35, 585, 500);
 			alive = imageLib.extractFeature(image, distX, distY, scope, flappyHeight);
 
-			processTime.push_back(clock() - processStartTime);
+			//processTime.push_back(clock() - processStartTime);
 
 			if (!alive)
 			{
@@ -81,11 +79,13 @@ int main()
 			FileIO::saveImage(image, imagePath, to_string(imageCounter++));*/
 		}
 
-		for (int i = 0; i < processTime.size(); i++)
+		FileIO::saveValue(clock() - gameStartTime, filePath, "Score.txt");
+
+		/*for (int i = 0; i < processTime.size(); i++)
 		{
-			cout << processTime[i] << endl;
+			FileIO::saveValue(processTime[i], filePath, "Process Time.txt");
 		}
-		processTime.clear();
+		processTime.clear();*/
 	}
 
 	cin.ignore();
