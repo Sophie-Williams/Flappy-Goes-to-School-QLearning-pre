@@ -13,3 +13,4 @@ pillar BGR high   80, 220, 160, 255
 Mouse (480, 560) (680, 440)
 
 Logic distY <= -20 || (distY <= 15 && speed <= 0) || speed < -25
+State Reduction distX > 15 || distY > 40 || distY < -5

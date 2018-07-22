@@ -136,6 +136,7 @@
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="ImageLib.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="QLearning.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="StaticBot.cpp" />
     <ClCompile Include="Test.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ImageLib.h" />
+    <ClInclude Include="QLearning.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="StaticBot.h" />
   </ItemGroup>

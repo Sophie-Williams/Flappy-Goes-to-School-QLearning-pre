@@ -9,6 +9,15 @@ bool Helper::validMove(string state, int move)
 
 string Helper::getState(int distX, int distY, int scope, int speed)
 {
+	int unit = 10;
+
+	if (distX > 20 || distY > 55 || distY < -5)
+	{
+		distX -= (distX % unit);
+		distY -= (distY % unit);
+		scope -= (scope % unit);
+	}
+
 	return to_string(distX) + '#' + to_string(distY) + '#' + to_string(scope) + '#' + to_string(speed);
 }
 

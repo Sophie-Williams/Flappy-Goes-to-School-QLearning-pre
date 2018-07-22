@@ -6,6 +6,7 @@
 #include "DesktopIO.h"
 #include "Helper.h"
 #include "StaticBot.h"
+#include "QLearning.h"
 
 using namespace std;
 using namespace cv;
@@ -16,18 +17,21 @@ DesktopIO desktopIO;
 
 string imagePath = "File\\Image\\";
 string filePath = "File\\Text\\";
+string QPath = "File\\Text\\QValue.txt";
 
 int imageCounter;
 
 StaticBot bot;
+QLearning QBot(.7, 1.0);
 
 vector<int> processTime, scores;
 
 int main()
 {
 	ShowWindow(::GetConsoleWindow(), SW_MINIMIZE);
+	QBot.readQValue(QPath);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 5000; i++)
 	{
 		Sleep(3000);
 		desktopIO.mouseClick(480, 560, 30);
@@ -40,7 +44,7 @@ int main()
 
 		Sleep(2000);
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			image = screen.getScreen(385, 35, 585, 500);
 		}
@@ -64,12 +68,13 @@ int main()
 				break;
 			}
 
-			if (bot.getAction(distX, distY, scope, preFlappyHeight-flappyHeight))
+			if (QBot.getAction(Helper::getState(distX, distY, scope, preFlappyHeight-flappyHeight)))
 			{
 				desktopIO.mouseClick(680, 440, 20);
 			}
 
 			preFlappyHeight = flappyHeight;
+			QBot.addReward(1);
 
 			/*circle(image, Point(5, flappyHeight), 3, Scalar(0, 0, 255), 2, 8);
 			line(image, Point(distX + 5, flappyHeight + distY), Point(distX + 5 + 26,  flappyHeight + distY), Scalar(0, 255, 0), 2, 8);
@@ -79,13 +84,12 @@ int main()
 			FileIO::saveImage(image, imagePath, to_string(imageCounter++));*/
 		}
 
-		FileIO::saveValue(clock() - gameStartTime, filePath, "Score.txt");
+		QBot.getAction("dead");
+		QBot.addReward(-10);
+		QBot.update();
+		QBot.saveQValue(QPath);
 
-		/*for (int i = 0; i < processTime.size(); i++)
-		{
-			FileIO::saveValue(processTime[i], filePath, "Process Time.txt");
-		}
-		processTime.clear();*/
+		FileIO::saveValue((clock() - gameStartTime) / 1000, filePath, "Score.txt");
 	}
 
 	cin.ignore();
