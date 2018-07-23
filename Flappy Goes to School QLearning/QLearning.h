@@ -22,7 +22,7 @@ public:
 
 	int getAction(string state);
 	void addReward(int reward);
-	void update();
+	void update(bool highDeath, int highDeathReward);
 	void readQValue(string path);
 	void saveQValue(string path);
 

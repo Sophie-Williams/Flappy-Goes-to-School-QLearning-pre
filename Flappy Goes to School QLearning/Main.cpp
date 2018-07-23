@@ -24,14 +24,14 @@ int imageCounter;
 StaticBot bot;
 QLearning QBot(.7, 1.0);
 
-vector<int> processTime, scores;
+vector<int> processTime;
 
 int main()
 {
 	ShowWindow(::GetConsoleWindow(), SW_MINIMIZE);
 	QBot.readQValue(QPath);
 
-	for (int i = 0; i < 5000; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		Sleep(3000);
 		desktopIO.mouseClick(480, 560, 30);
@@ -44,24 +44,26 @@ int main()
 
 		Sleep(2000);
 
-		for (int i = 0; i < 100; i++)
+		for (int j = 0; j < 50; j++)
 		{
 			image = screen.getScreen(385, 35, 585, 500);
+			imageLib.extractFeature(image, distX, distY, scope, flappyHeight);
 		}
 
 		desktopIO.mouseClick(680, 440, 30);
 		gameStartTime = clock();
+		processTime.clear();
 
 		Sleep(500);
 
 		while (1)
 		{
-			//processStartTime = clock();
+			processStartTime = clock();
 
 			image = screen.getScreen(385, 35, 585, 500);
 			alive = imageLib.extractFeature(image, distX, distY, scope, flappyHeight);
 
-			//processTime.push_back(clock() - processStartTime);
+			processTime.push_back(clock() - processStartTime);
 
 			if (!alive)
 			{
@@ -86,10 +88,11 @@ int main()
 
 		QBot.getAction("dead");
 		QBot.addReward(-10);
-		QBot.update();
+		QBot.update(distY >= 25, -10);
 		QBot.saveQValue(QPath);
 
 		FileIO::saveValue((clock() - gameStartTime) / 1000, filePath, "Score.txt");
+		FileIO::saveValue(processTime, filePath, "Process Time.txt");
 	}
 
 	cin.ignore();

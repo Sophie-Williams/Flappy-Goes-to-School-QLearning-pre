@@ -57,7 +57,7 @@ void QLearning::addReward(int reward)
 	mRewards.push_back(reward);
 }
 
-void QLearning::update()
+void QLearning::update(bool highDeath, int highDeathReward)
 {
 	reverse(mStates.begin(), mStates.end());
 	reverse(mActions.begin(), mActions.end());
@@ -71,6 +71,12 @@ void QLearning::update()
 		int reward = mRewards[i - 1];
 
 		double resultReward = -DBL_MAX;
+
+		if (highDeath && currAction)
+		{
+			reward = highDeath;
+			highDeath = false;
+		}
 
 		for (int j = 0; j < MAX_ACTION; j++)
 		{

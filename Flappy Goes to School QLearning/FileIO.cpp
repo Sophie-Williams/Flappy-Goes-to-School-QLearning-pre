@@ -17,7 +17,20 @@ Mat FileIO::getImage(string path, string fileName)
 void FileIO::saveValue(int value, string path, string fileName)
 {
 	ofstream file(path + fileName, ios::app);
-	file << value << " ";
+	file << value << endl;
+	file.close();
+}
+
+void FileIO::saveValue(vector<int> value, string path, string fileName)
+{
+	ofstream file(path + fileName, ios::app);
+
+	for (int i = 0; i < value.size(); i++)
+	{
+		file << value[i] << " ";
+	}
+
+	file << endl;
 	file.close();
 }
 
