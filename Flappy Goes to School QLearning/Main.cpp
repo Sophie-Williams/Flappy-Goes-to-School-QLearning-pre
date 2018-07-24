@@ -31,7 +31,7 @@ int main()
 	ShowWindow(::GetConsoleWindow(), SW_MINIMIZE);
 	QBot.readQValue(QPath);
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5000; i++)
 	{
 		Sleep(3000);
 		desktopIO.mouseClick(480, 560, 30);
