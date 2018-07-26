@@ -70,13 +70,18 @@ void QLearning::update(bool highDeath, int highDeathReward)
 		int resultState = mStateID[mStates[i - 1]];
 		int reward = mRewards[i - 1];
 
-		double resultReward = -DBL_MAX;
+		if (currState == resultState)
+		{
+			continue;
+		}
 
 		if (highDeath && currAction)
 		{
-			reward = highDeath;
+			reward = highDeathReward;
 			highDeath = false;
 		}
+
+		double resultReward = -DBL_MAX;
 
 		for (int j = 0; j < MAX_ACTION; j++)
 		{

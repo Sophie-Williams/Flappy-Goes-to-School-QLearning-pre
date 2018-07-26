@@ -11,7 +11,7 @@ string Helper::getState(int distX, int distY, int scope, int speed)
 {
 	int unit = 10;
 
-	if (distX > 20 || distY > 55 || distY < -5)
+	if (distX > 20 || distY > 40 || distY < -5)
 	{
 		distX -= (distX % unit);
 		distY -= (distY % unit);

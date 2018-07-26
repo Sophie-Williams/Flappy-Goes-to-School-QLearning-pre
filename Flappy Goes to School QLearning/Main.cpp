@@ -22,7 +22,7 @@ string QPath = "File\\Text\\QValue.txt";
 int imageCounter;
 
 StaticBot bot;
-QLearning QBot(.7, 1.0);
+QLearning QBot(.5, 1.0);
 
 vector<int> processTime;
 
@@ -38,7 +38,7 @@ int main()
 
 		Mat image;
 		bool alive = true;
-		int distX, distY, scope, flappyHeight, preFlappyHeight=300;
+		int distX, distY, scope, flappyHeight, preFlappyHeight=40;
 
 		clock_t processStartTime, gameStartTime;
 
@@ -87,8 +87,8 @@ int main()
 		}
 
 		QBot.getAction("dead");
-		QBot.addReward(-10);
-		QBot.update(distY >= 25, -10);
+		QBot.addReward(-100);
+		QBot.update(distY >= 25, -100);
 		QBot.saveQValue(QPath);
 
 		FileIO::saveValue((clock() - gameStartTime) / 1000, filePath, "Score.txt");
