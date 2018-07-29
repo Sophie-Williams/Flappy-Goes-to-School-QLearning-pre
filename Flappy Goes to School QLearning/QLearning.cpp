@@ -125,6 +125,8 @@ void QLearning::readQValue(string path)
 			mQValue[mStateCounter][i] = value;
 		}
 	}
+
+	cout << "Found " << mStateID.size() << " states" << endl;
 }
 
 void QLearning::saveQValue(string path)
@@ -143,4 +145,6 @@ void QLearning::saveQValue(string path)
 		}
 		file << endl;
 	}
+
+	cout << "State Counter: " << mStateID.size() << endl;
 }

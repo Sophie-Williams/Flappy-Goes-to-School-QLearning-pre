@@ -29,10 +29,13 @@ vector<int> processTime;
 int main()
 {
 	ShowWindow(::GetConsoleWindow(), SW_MINIMIZE);
+
+	cout << "Reading prevoius Q values" << endl;
 	QBot.readQValue(QPath);
 
 	for (int i = 0; i < 5000; i++)
 	{
+		cout << "iter: " << i + 1 << endl;
 		Sleep(3000);
 		desktopIO.mouseClick(480, 560, 30);
 
@@ -77,13 +80,6 @@ int main()
 
 			preFlappyHeight = flappyHeight;
 			QBot.addReward(1);
-
-			/*circle(image, Point(5, flappyHeight), 3, Scalar(0, 0, 255), 2, 8);
-			line(image, Point(distX + 5, flappyHeight + distY), Point(distX + 5 + 26,  flappyHeight + distY), Scalar(0, 255, 0), 2, 8);
-			line(image, Point(distX + 5, flappyHeight + distY - 36), Point(distX + 5 + 26, flappyHeight + distY - 36), Scalar(0, 255, 0), 2, 8);
-			line(image, Point(5, flappyHeight), Point(5, flappyHeight + scope), Scalar(255, 0, 0), 2, 8);
-
-			FileIO::saveImage(image, imagePath, to_string(imageCounter++));*/
 		}
 
 		QBot.getAction("dead");
@@ -93,6 +89,8 @@ int main()
 
 		FileIO::saveValue((clock() - gameStartTime) / 1000, filePath, "Score.txt");
 		FileIO::saveValue(processTime, filePath, "Process Time.txt");
+
+		cout << "Finished" << endl;
 	}
 
 	cin.ignore();
