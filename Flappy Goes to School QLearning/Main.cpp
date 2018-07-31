@@ -21,7 +21,6 @@ string QPath = "File\\Text\\QValue.txt";
 
 int imageCounter;
 
-StaticBot bot;
 QLearning QBot(.5, 1.0);
 
 vector<int> processTime;
