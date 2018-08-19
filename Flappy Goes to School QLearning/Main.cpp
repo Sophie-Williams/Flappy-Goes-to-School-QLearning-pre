@@ -74,7 +74,7 @@ int main()
 
 			if (QBot.getAction(Helper::getState(distX, distY, scope, preFlappyHeight-flappyHeight)))
 			{
-				desktopIO.mouseClick(680, 440, 20);
+				desktopIO.mouseClick(680, 440, 30);
 			}
 
 			preFlappyHeight = flappyHeight;
